@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contract Interface</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smart Contract Interface</h1>
+            <div class="wallet-section">
+                <button id="connectWallet" class="btn btn-primary">Connect Wallet</button>
+                <div id="walletInfo" class="wallet-info hidden">
+                    <span id="walletAddress"></span>
+                    <span id="walletBalance"></span>
+                </div>
+            </div>
+        </header>
 
+        <main>
+            <div class="card">
+                <h2>Contract Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Contract Address:</label>
+                        <span id="contractAddress">Not connected</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Network:</label>
+                        <span id="networkName">Not connected</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Status:</label>
+                        <span id="contractStatus">Disconnected</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Read Functions</h2>
+                <div class="function-group">
+                    <div class="input-group">
+                        <label for="readFunctionSelect">Select Function:</label>
+                        <select id="readFunctionSelect" class="form-control">
+                            <option value="">Choose a function...</option>
+                            <!-- Add your contract read functions here -->
+                            <option value="name">name()</option>
+                            <option value="symbol">symbol()</option>
+                            <option value="totalSupply">totalSupply()</option>
+                            <option value="balanceOf">balanceOf(address)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="readParams">Parameters (if any):</label>
+                        <input type="text" id="readParams" class="form-control" placeholder="Enter parameters separated by comma">
+                    </div>
+                    <button id="readFunction" class="btn btn-secondary">Read</button>
+                    <div id="readResult" class="result-box"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Write Functions</h2>
+                <div class="function-group">
+                    <div class="input-group">
+                        <label for="writeFunctionSelect">Select Function:</label>
+                        <select id="writeFunctionSelect" class="form-control">
+                            <option value="">Choose a function...</option>
+                            <!-- Add your contract write functions here -->
+                            <option value="transfer">transfer(address, uint256)</option>
+                            <option value="approve">approve(address, uint256)</option>
+                            <option value="mint">mint(address, uint256)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="writeParams">Parameters:</label>
+                        <input type="text" id="writeParams" class="form-control" placeholder="Enter parameters separated by comma">
+                    </div>
+                    <div class="input-group">
+                        <label for="ethValue">ETH Value (if payable):</label>
+                        <input type="number" id="ethValue" class="form-control" placeholder="0" step="0.001">
+                    </div>
+                    <button id="writeFunction" class="btn btn-primary">Execute Transaction</button>
+                    <div id="writeResult" class="result-box"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Transaction History</h2>
+                <div id="transactionHistory" class="transaction-list">
+                    <p class="no-transactions">No transactions yet</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with Ethers.js</p>
+        </footer>
+    </div>
+
+    <div id="loadingModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="spinner"></div>
+            <p>Processing transaction...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
